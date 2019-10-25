@@ -1,0 +1,66 @@
+ul li {
+    list-style: none;
+}
+.d-flex {
+    display: flex!important;
+}
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: grey;
+    color: black;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+button {
+    padding: 0;
+border: none;
+background: none;
+}
+button:hover{
+    background-color: #e7e7e7;
+}
+body {
+    margin: 10px;
+}
+div {
+    width: 100%;
+    margin: 10px;
+}
+.image-fluid {
+    max-width: 100%;
+    height: auto;
+}
+a:hover {
+    text-decoration: none;
+    color: rgb(243, 243, 125);
+    transition-duration: 1s;
+}
+
+.cardme {
+    max-height: 100%;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+/* float: center;    */
+    align-items: center;
+    border: none;
+}
+#results {
+    margin: auto;
+    text-align: center !important;    
+}
+
+/* width: 500px;
+    min-height: 30px;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+     */
