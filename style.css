@@ -25,6 +25,7 @@ button:hover{
 }
 body {
     margin: 10px;
+    background-color: antiquewhite;
 }
 div {
     width: 100%;
@@ -50,6 +51,8 @@ a:hover {
 /* float: center;    */
     align-items: center;
     border: none;
+    background-color: antiquewhite;
+
 }
 #results {
     margin: auto;

@@ -1,51 +1,76 @@
-let searchMovie = function(event) {
-    //   event.preventDefault();
+// let app = new Vue({ //this refers to this whole vue object
+//     el: '#app',
+//     data: {
+//         number: '', //Number of comic
+//         max: '',
+//         current: {
+//             title: '', //of comic
+//             img: '',
+//             alt: '',
+//         },
+//         loading: true,
+//         addedName: '',
+//         addedComment: '',
+//         comments: {},
+//         ratings: {},
+//     },
 
-    const movie = document.getElementById("movieTitle").value;
-    const url = "http://www.omdbapi.com/?t=" + movie + "&apikey=ae3a1bc8";
-    fetch(url)
-        .then(function(response) {
-            return response.json();
-        }).then(function(json) {
-            console.log(json);
-            var results = "";
-            if(json.Response == "False"){
-                results += json.Error;
-            }
-            else{
-            results += "<h3>" + json.Title + "</h3>"
-            results += "<ul>";
-            results += "<li><b>Released: </b>" + json.Released + "</li>";
-            results += "<li><b>Actors: </b>" + json.Actors + "</li>";
-            results += "<li><b>Plot: </b>" + json.Plot + "</li>";
-            results += '<div id="detail">';
-            results += '<button type="button">More Details?</button><br>'
-            results += '</div>'
-            results += "</ul>";
-            results += "<img class=\"image-fluid\" src=\"" + json.Poster + " alt=\"Poster\">";
-            }
-            
-            
-            document.getElementById("result").innerHTML = results;
-            
-            document.getElementById("detail").addEventListener("click", function(event) {
-                var details = "";
-                var ratings = "";
-                details += '<li><b>Director: </b>' + json.Director + '</li>';
-                details += '<li><b>Production: </b>' + json.Production + '</li>';
-                details += '<li><b>Awards: </b>' + json.Awards + '</li>';
-                details += '<li><b>Genre: </b>' + json.Genre + '</li>';
-                details += '<li><b>Ratings: </b>';
-                for(let i = 0; i < json.Ratings.length; i++){
-                 ratings += "<br>" + json.Ratings[i].Source + ': ' + json.Ratings[i].Value;
-                }
-                details += ratings + '</li>';
-                //
-                console.log(details);
-                document.getElementById("detail").innerHTML = details;
-            })
+// )};
+var APP = new Vue({
+    el: '#APP',
+    data: {
+        inputTitle: "Star Wars",
+        loading: false,
+        results: false,
+//  This is the data they have
+        Title: '', 
+        response: '',
         
-        })
-        
-}
+    },
+    watched:
+    {
+        // titleofInput() {
+
+        // },
+        watchinput() {
+            if (inputTitle === "") {
+                console.log("movietitenothing");
+            }
+        },
+    },
+    created()
+    {
+        console.log(this.loading);
+        this.getMovie();
+    },
+    methods:
+    {
+        async getMovie() {
+            this.loading = true;
+            this.results = false;
+            console.log("We are in getMovie");
+            console.log(this.inputTitle);
+
+            //Please note, this key is not to be copied without permission.
+            //My friend Sean owns this key. 
+
+            const theUrl = "https://www.omdbapi.com/?t=" + this.inputTitle + "&apikey=ae3a1bc8";
+            console.log(theUrl);
+            console.log(this.loading);
+            const response = await axios.get(theUrl);
+            this.data = response.data;
+            console.log(response);
+            this.loading = false;
+            console.log(this.loading);
+
+        },
+        getResults()
+        {
+            this.results = true;
+            console.log("Getting results: ", this.results);
+        },
+    },
+
+
+});
 

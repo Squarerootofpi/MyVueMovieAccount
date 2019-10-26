@@ -1,42 +1,74 @@
 <html>
 
 <head>
-  <title>MoiveDMB</title>
+  <title>Vue Movie Info</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="card">
-    <h1>Find your favorite movie Poster!</h1>
-    <p>Movie Title:
-      <input id="movieTitle" type="text" onkeyup="searchMovie()"></input>
-    </p>
-    <h4>The closest result from your search:</h4>
+  <!-- <input id="movieTitle" type="text" onkeyup="searchMovie()"></input> -->
+  <div id="APP">
+    <div class="card">
+      <h1>Vue Ur Movie</h1>
+      <form v-on:submit.prevent="getMovie">
+        <input v-model="inputTitle" placeholder="Title">
+        <button>Submit</button>
+      </form>
+    </div>
+    <div v-if="loading === true">
+      <h2>loading... </h2>
+    </div>
+    <div v-else-if="loading === false">
+      <!-- <p> Done loading!
+        {{ this.loading }}
+      </p> -->
+      <div class="card">
+        <h3>{{data.Title}}</h3>
+        <ul>
+          <li><b>Released: </b>{{data.Released}}</li>
+          <li><b>Actors: </b>{{data.Actors}}</li>
+          <li><b>Plot: </b>{{data.Plot}}</li>
+          <div v-if="results">
+            <p>Additional Info: </p>
+            <li><b>Director: </b>{{data.Director}}</li>
+            <li><b>Production: </b>{{data.Production}}</li>
+            <li><b>Awards: </b>{{data.Awards}}</li>
+            <li><b>Genre: </b>{{data.Genre}}</li>
+            <!-- 
+                Later, when have time, add avg ratings? Maybe from different API
+
+                <li><b>Ratings: </b> <div v-for="comment in comments[number]">
+                  <hr>
+                  <p>{{comment.text}}</p>
+                  <p><i>-- {{comment.author}}</i></p>
+                  <p>{{comment.date}}</p>
+                </div> -->
+          </div>
+          <div v-if="!results">
+            <button v-on:click="getResults">More Details?</button><br>
+          </div>
+        </ul>
+
+        <img class="image-fluid" v-bind:src="data.Poster" v-bind:alt="data.alt">
+      </div>
+    </div>
+
+
   </div>
-  <div id="result" class="card">
-    <h4>Result displayed here.</h4>
-  </div>
-<br>
-<br>
+
+  <br>
+  <br>
 
   <footer class="footer mt-auto py-3 bg-dark">
-    <a href="https://github.com/Squarerootofpi/MovieDMB">Github</a>
+    <a href="https://github.com/Squarerootofpi/MyVueMovieAccount">Github</a>
 
   </footer>
-  <!-- <div class="card-footer bg-dark" id="footer">
-            <section>
-              <aside>
-                <h2><a href="https://github.com/BYUCS260/lab1-html-css-Squarerootofpi" target="blank">Github</a></h2>
-              </aside>
-              <article>
-                <dl>&copy;Joseph Steed 2019</dl>
-              </article>
-            </section>
-          </div> -->
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
   <script src="script.js"></script>
 </body>
 
